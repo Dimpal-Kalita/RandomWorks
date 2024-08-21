@@ -1,7 +1,7 @@
 ### Steps to Run the Script:
 
 1. **Update Paths:**
-   - Replace `/path/to/tomcat7` and `/path/to/nutch-0.9` with the actual paths to your Tomcat 7 and Nutch 0.9 installations.
+   - Replace `$TOMCAT_HOME` and `$NUTCH_HOME` with the actual paths to your Tomcat 7 and Nutch 0.9 installations.
 
 2. **Add URLs:**
    - Update the `URLS_FILE` variable with your seed URLs. Replace `"http://example.com"` with the URLs you want to crawl.
