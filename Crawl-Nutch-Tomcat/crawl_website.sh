@@ -43,7 +43,7 @@ fi
 
 $NUTCH_HOME/bin/nutch inject $CURRENT_DIR/crawl/crawldb $CURRENT_DIR/urls
 
-$NUTCH_HOME/bin/nutch generate $CURRENT_DIR/crawl/crawldb $CURRENT_DIR/crawl/segments
+$NUTCH_HOME/bin/nutch generate $CURRENT_DIR/crawl/crawldb $CURRENT_DIR/crawl/segments -depth 2 -topN 5
 
 SEGMENT=$(ls $CURRENT_DIR/crawl/segments | tail -n 1)
 $NUTCH_HOME/bin/nutch fetch $CURRENT_DIR/crawl/segments/$SEGMENT
@@ -81,6 +81,21 @@ fi
 # Display fetched content
 echo "Displaying fetched content..."
 cat $CURRENT_DIR/dump-output/content/*
+
+
+#Move the dump-output to Tomcat's webapps directory as a new web app
+DUMP_WEB_APP="$TOMCAT_HOME/webapps/dump-output"
+echo "Deploying dumped content as a web application in Tomcat..."
+mkdir -p $DUMP_WEB_APP
+cp -r $CURRENT_DIR/dump-output/* $DUMP_WEB_APP/
+
+# Create a simple index.html file to list contents
+INDEX_FILE="$DUMP_WEB_APP/index.html"
+echo "<html><body><h1>Crawled Content</h1><ul>" > $INDEX_FILE
+for file in $(ls $DUMP_WEB_APP/content/); do
+    echo "<li><a href=\"content/$file\">$file</a></li>" >> $INDEX_FILE
+done
+echo "</ul></body></html>" >> $INDEX_FILE
 
 # Build the WAR file and deploy on Tomcat
 echo "Building the Nutch WAR file..."
