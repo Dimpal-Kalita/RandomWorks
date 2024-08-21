@@ -20,3 +20,9 @@
 - The script configures Nutch, injects URLs, performs the crawl, builds the Nutch WAR file, and deploys it on Tomcat 7.
 - Make sure you have Apache Ant installed to build the WAR file.
 - You can access the Nutch web application at `http://localhost:8080/nutch-0.9` after the script completes.
+
+5. ** Stop the Site:**
+    ```bash
+    $CATALINA_HOME/bin/shutdown.sh
+    ```
+

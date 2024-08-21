@@ -1,0 +1,34 @@
+
+Recno:: 0
+URL:: https://cwiki.apache.org/confluence/display/NUTCH/NutchTutorial
+
+CrawlDatum::
+Version: 5
+Status: 1 (db_unfetched)
+Fetch time: Wed Aug 21 13:32:30 IST 2024
+Modified time: Thu Jan 01 05:30:00 IST 1970
+Retries since fetch: 0
+Retry interval: 30.0 days
+Score: 1.0
+Signature: null
+Metadata: _ngt_:1724227400172 
+
+Content::
+Version: 2
+url: https://cwiki.apache.org/confluence/display/NUTCH/NutchTutorial
+base: https://cwiki.apache.org/confluence/display/NUTCH/NutchTutorial
+contentType: 
+metadata: nutch.segment.name=20240821133320 nutch.crawl.score=1.0 
+Content:
+
+CrawlDatum::
+Version: 5
+Status: 34 (fetch_retry)
+Fetch time: Wed Aug 21 13:33:22 IST 2024
+Modified time: Thu Jan 01 05:30:00 IST 1970
+Retries since fetch: 0
+Retry interval: 30.0 days
+Score: 1.0
+Signature: null
+Metadata: _ngt_:1724227400172 
+
