@@ -17,11 +17,15 @@
    ```
 
 ### Notes:
+- Go to "$NUTCH_HOME/conf/nutch-site.xml" to configure Nutch properties.
+```xml
+ <name>plugin.includes</name>
+  <value>protocol-http|protocol-httpclient|urlfilter-regex|parse-(html)|index-(basic|anchor)|indexer-solr|query-(basic|site|url)|response-(json|xml)|summary-basic|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
+```
 - The script configures Nutch, injects URLs, performs the crawl, builds the Nutch WAR file, and deploys it on Tomcat 7.
 - Make sure you have Apache Ant installed to build the WAR file.
 - You can access the Nutch web application at `http://localhost:8080/nutch-0.9` after the script completes.
-
-5. ** Stop the Site:**
+1. ** Stop the Site:**
     ```bash
     $CATALINA_HOME/bin/shutdown.sh
     ```
