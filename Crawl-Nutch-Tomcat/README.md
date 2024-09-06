@@ -19,7 +19,14 @@
    - You can change the depth and topN values in the script to control the crawl depth and the number of URLs to fetch.
    - The default values are `2` for depth and `5` for topN.
    - It is avaiable `generate` line of the script.
-
+6. **DownGrade Java**
+   - [Link](https://stackoverflow.com/questions/9219323/downgrade-java-version)
+   ```
+   sudo apt-get update 
+   sudo apt-get install openjdk-8-jdk
+   sudo update-alternatives --config javac
+   ```
+   - GO to zshrc/ bashrc and change java home address
 ### Notes:
 - Go to "$NUTCH_HOME/conf/nutch-site.xml" to configure Nutch properties.
 ```xml

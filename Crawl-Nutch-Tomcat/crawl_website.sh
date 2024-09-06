@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-TOMCAT_HOME="/usr/local/tomcat7"  # Tomcat installation path
+TOMCAT_HOME="/usr/local/tomcat7/"  # Tomcat installation path
 CURRENT_DIR=$(pwd)               # Current directory where script is executed
 CRAWL_DIR="$CURRENT_DIR/crawl"   # Directory to store crawl data
 SEGMENTS_DIR="$CRAWL_DIR/segments"
@@ -43,8 +43,7 @@ fi
 
 $NUTCH_HOME/bin/nutch inject $CURRENT_DIR/crawl/crawldb $CURRENT_DIR/urls
 
-$NUTCH_HOME/bin/nutch generate $CURRENT_DIR/crawl/crawldb $CURRENT_DIR/crawl/segments -depth 2 -topN 5
-
+$NUTCH_HOME/bin/nutch generate $CURRENT_DIR/crawl/crawldb $CURRENT_DIR/crawl/segments -depth 2 -topN 10
 SEGMENT=$(ls $CURRENT_DIR/crawl/segments | tail -n 1)
 $NUTCH_HOME/bin/nutch fetch $CURRENT_DIR/crawl/segments/$SEGMENT
 
@@ -84,29 +83,29 @@ cat $CURRENT_DIR/dump-output/content/*
 
 
 #Move the dump-output to Tomcat's webapps directory as a new web app
-DUMP_WEB_APP="$TOMCAT_HOME/webapps/dump-output"
-echo "Deploying dumped content as a web application in Tomcat..."
-mkdir -p $DUMP_WEB_APP
-cp -r $CURRENT_DIR/dump-output/* $DUMP_WEB_APP/
+# DUMP_WEB_APP="$TOMCAT_HOME/webapps/dump-output"
+# echo "Deploying dumped content as a web application in Tomcat..."
+# mkdir -p $DUMP_WEB_APP
+# cp -r $CURRENT_DIR/dump-output/* $DUMP_WEB_APP/
 
-# Create a simple index.html file to list contents
-INDEX_FILE="$DUMP_WEB_APP/index.html"
-echo "<html><body><h1>Crawled Content</h1><ul>" > $INDEX_FILE
-for file in $(ls $DUMP_WEB_APP/content/); do
-    echo "<li><a href=\"content/$file\">$file</a></li>" >> $INDEX_FILE
-done
-echo "</ul></body></html>" >> $INDEX_FILE
+# # Create a simple index.html file to list contents
+# INDEX_FILE="$DUMP_WEB_APP/index.html"
+# echo "<html><body><h1>Crawled Content</h1><ul>" > $INDEX_FILE
+# for file in $(ls $DUMP_WEB_APP/content/); do
+#     echo "<li><a href=\"content/$file\">$file</a></li>" >> $INDEX_FILE
+# done
+# echo "</ul></body></html>" >> $INDEX_FILE
 
-# Build the WAR file and deploy on Tomcat
-echo "Building the Nutch WAR file..."
-ant war
-WAR_FILE="$NUTCH_HOME/build/nutch-0.9.war"
-cp $WAR_FILE $TOMCAT_HOME/webapps/
+# # Build the WAR file and deploy on Tomcat
+# echo "Building the Nutch WAR file..."
 
-# Restart Tomcat to deploy the WAR file
-echo "Restarting Tomcat to deploy the Nutch web application..."
-$TOMCAT_HOME/bin/shutdown.sh
-$TOMCAT_HOME/bin/startup.sh
+# WAR_FILE="$NUTCH_HOME/build/nutch-0.9.war"
+# cp $WAR_FILE $TOMCAT_HOME/webapps/
+# cp -r $CURRENT_DIR/crawl $TOMCAT_HOME/webapps/nutch-0.9/WEB-INF/
+# # Restart Tomcat to deploy the WAR file
+# echo "Restarting Tomcat to deploy the Nutch web application..."
+# $TOMCAT_HOME/bin/shutdown.sh
+# $TOMCAT_HOME/bin/startup.sh
 
-echo "Crawling process completed and Nutch web application deployed!"
-echo "You can access the web application at http://localhost:8080/nutch-0.9"
+# echo "Crawling process completed and Nutch web application deployed!"
+# echo "You can access the web application at http://localhost:8080/nutch-0.9"
