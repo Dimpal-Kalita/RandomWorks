@@ -144,3 +144,25 @@ func ParseSeatNumbers(input string) ([]int, error){
 }
 ```
 - The ParseSeatNumbers function is used to parse the seat numbers from the input string.
+
+
+
+## Edge Cases for a system like this
+**Concurrency Limits:**
+If the system handles an extremely high volume of concurrent requests, you might need to implement rate limiting or queueing mechanisms to prevent overwhelming the server.
+
+**Double Booking during:**
+Even with mutexes, race conditions could occur if not handled correctly, particularly in a distributed environment where multiple instances of the application are running. This scenario could lead to double booking if there's a lag in state synchronization.
+
+**Scalability:**
+The current implementation is in-memory and single-node. To scale, consider moving seat data to a persistent, shared database like Redis, PostgreSQL, or similar, which handles concurrency at the database level.
+
+**Security and Authentication:**
+Implement authentication to prevent unauthorized bookings. Add encryption to protect data in transit, especially when using network-based communication between services.
+
+
+**Fault Tolerance:**
+If the system crashes during a booking operation, you need to ensure that the state is consistent when it recovers. This could involve persisting the state to a database or using a distributed consensus algorithm.
+
+**Error Handling and Logging:**
+Proper error handling and logging are essential to diagnose issues and ensure the system is running smoothly. You should log errors and exceptions and handle them gracefully to prevent crashes.
